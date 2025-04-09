@@ -26,7 +26,7 @@ class OpenPose_Preprocessor:
         detect_face = detect_face == "enable"
         scale_stick_for_xinsr_cn = scale_stick_for_xinsr_cn == "enable"
         # wzlu: force to cpu
-        model = OpenposeDetector.from_pretrained().to('cpu')        
+        model = OpenposeDetector.from_pretrained().to(model_management.get_torch_device())        
         self.openpose_dicts = []
         def func(image, **kwargs):
             pose_img, openpose_dict = model(image, **kwargs)
