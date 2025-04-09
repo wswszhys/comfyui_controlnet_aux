@@ -13,7 +13,6 @@ class Hand(object):
         self.model = handpose_model()
         model_dict = util.transfer(self.model, torch.load(model_path))
         self.model.load_state_dict(model_dict)
-        self.model.to(torch.float16)
         self.model.eval()
         self.device = "cpu"
 
