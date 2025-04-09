@@ -9,12 +9,12 @@ def make_layers(block, no_relu_layers):
     for layer_name, v in block.items():
         if 'pool' in layer_name:
             layer = nn.MaxPool2d(kernel_size=v[0], stride=v[1],
-                                    padding=v[2]).to(torch.float32)
+                                    padding=v[2]).to(torch.float16)
             layers.append((layer_name, layer))
         else:
             conv2d = nn.Conv2d(in_channels=v[0], out_channels=v[1],
                                kernel_size=v[2], stride=v[3],
-                               padding=v[4]).to(torch.float32)
+                               padding=v[4]).to(torch.float16)
             layers.append((layer_name, conv2d))
             if layer_name not in no_relu_layers:
                 layers.append(('relu_'+layer_name, nn.ReLU(inplace=True)))
